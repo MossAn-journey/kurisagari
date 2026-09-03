@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#74c7a4" />
-  <meta name="description" content="魚釣りや森の仲間集めを楽しみながら、くり下がりの引き算（減加法）を学べる子ども向けアプリ" />
+  <meta name="theme-color" content="#f2b84b" />
+  <meta name="description" content="宝探し、魚釣り、森の仲間集めを楽しみながら、くり下がりの引き算（減加法）を学べる子ども向けアプリ" />
   <title>くりさがりアドベンチャー</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -14,20 +14,33 @@
       <div><p class="eyebrow">10からひくと、かんたん！</p><h1>くりさがりアドベンチャー</h1></div>
       <div class="top-actions"><button id="collectionButton" class="icon-button" type="button">📖<span>ずかん</span></button><div class="star-counter"><span>⭐</span><strong id="starCount">0</strong></div></div>
     </header>
-    <section class="theme-switcher"><button type="button" class="theme-button active" data-theme="lake">🎣 さかなつり</button><button type="button" class="theme-button" data-theme="forest">🌳 もりのなかま</button></section>
+
+    <section class="theme-switcher">
+      <button type="button" class="theme-button active" data-theme="treasure">🏴‍☠️ たからさがし</button>
+      <button type="button" class="theme-button" data-theme="lake">🎣 さかなつり</button>
+      <button type="button" class="theme-button" data-theme="forest">🌳 もりのなかま</button>
+    </section>
+
     <section class="stage-panel"><div class="stage-title-row"><div><p class="mini-label">れんしゅうステージ</p><strong id="stageTitle">まずは −5</strong></div><span id="stageProgressText" class="stage-progress-text">あと3もんで −6</span></div><div id="stageButtons" class="stage-buttons"></div></section>
-    <section id="gameCard" class="game-card lake" aria-live="polite">
-      <div class="scene"><div class="scene-sky"></div><div class="scene-ground"></div><div id="rewardCharacter" class="scene-character">🐟</div><div id="speechBubble" class="speech-bubble">エサを 5こ つかうよ！</div></div>
+
+    <section id="gameCard" class="game-card treasure" aria-live="polite">
+      <div class="scene"><div class="scene-sky"></div><div class="scene-ground"></div><div id="rewardCharacter" class="scene-character">🗝️</div><div id="speechBubble" class="speech-bubble">カギを 5こ つかうよ！</div></div>
       <div class="problem-bar"><span class="problem-label">もんだい</span><div id="problemText" class="problem-text">11 − 5 = ?</div></div>
       <ol class="stepper"><li id="stepDot1" class="step active"><span>1</span><b>10とバラ</b></li><li id="stepDot2" class="step"><span>2</span><b>10からひく</b></li><li id="stepDot3" class="step"><span>3</span><b>あわせる</b></li></ol>
+
       <section id="stepOne" class="lesson-step"><h2>① まず、10とバラに わけてみよう</h2><p id="splitSentence" class="guide-sentence"></p><div class="number-layout"><div id="tenBox" class="ten-box"><div class="box-ribbon">10この まとまり</div><div id="tenTokens" class="ten-grid"></div></div><div class="plus-sign">＋</div><div class="extra-box"><div class="box-ribbon">バラ</div><div id="extraTokens" class="extra-grid"></div><strong id="extraCountLabel"></strong></div></div><button id="foundTenButton" class="primary-button big-button" type="button">👀 10とバラ、みつけた！</button></section>
-      <section id="stepTwo" class="lesson-step hidden"><h2 id="takeHeading"></h2><p class="guide-sentence">まるを <strong id="takeInstructionCount"></strong>、<span id="actionVerb">おさかな</span>へ はこんでね。</p><div class="drag-playground"><div class="ten-box compact"><div class="box-ribbon">ここから とるよ</div><div id="dragTokens" class="ten-grid"></div></div><div class="arrow-hint">➡</div><div id="dropTarget" class="drop-target"><div id="dropTargetEmoji" class="drop-emoji">🐟</div><strong id="dropTargetText">ここへ！</strong><span id="givenCounter"></span></div></div><div class="tap-helper"><span>ドラッグがむずかしいときは</span><button id="giveOneButton" type="button" class="secondary-button">1こずつ あげる</button></div></section>
+
+      <section id="stepTwo" class="lesson-step hidden"><h2 id="takeHeading"></h2><p class="guide-sentence">まるを <strong id="takeInstructionCount"></strong>、<span id="actionVerb">たからばこ</span>へ はこんでね。</p><div class="drag-playground"><div class="ten-box compact"><div class="box-ribbon">ここから とるよ</div><div id="dragTokens" class="ten-grid"></div></div><div class="arrow-hint">➡</div><div id="dropTarget" class="drop-target"><div id="dropTargetEmoji" class="drop-emoji">🔐</div><strong id="dropTargetText">カギを いれよう！</strong><span id="givenCounter"></span></div></div><div class="tap-helper"><span>ドラッグがむずかしいときは</span><button id="giveOneButton" type="button" class="secondary-button">1こずつ つかう</button></div></section>
+
       <section id="stepThree" class="lesson-step hidden"><h2>③ のこりと バラを あわせよう</h2><p id="remainSentence" class="guide-sentence"></p><div class="merge-row"><div class="merge-group"><span class="merge-label">10から のこった</span><div id="remainTokens" class="merge-tokens"></div><strong id="remainCount"></strong></div><div class="merge-symbol">＋</div><div class="merge-group"><span class="merge-label">さいしょの バラ</span><div id="mergeExtraTokens" class="merge-tokens"></div><strong id="mergeExtraCount"></strong></div></div><button id="mergeButton" class="primary-button big-button" type="button">✨ ガッチャン！ あわせる</button></section>
-      <section id="resultStep" class="result-step hidden"><div class="confetti">✨ ⭐ ✨</div><h2>できたー！</h2><div id="resultEquation" class="result-equation"></div><div id="methodEquation" class="method-equation"></div><div class="reward-card"><div id="rewardEmoji" class="reward-emoji">🐟</div><div><span id="rewardPrefix"></span><strong id="rewardName"></strong></div></div><p id="unlockMessage" class="unlock-message hidden"></p><button id="nextButton" class="primary-button big-button" type="button">つぎも やる！ ➜</button></section>
+
+      <section id="resultStep" class="result-step hidden"><div class="confetti">✨ ⭐ ✨</div><h2>できたー！</h2><div id="resultEquation" class="result-equation"></div><div id="methodEquation" class="method-equation"></div><div class="reward-card"><div id="rewardEmoji" class="reward-emoji">🪙</div><div><span id="rewardPrefix"></span><strong id="rewardName"></strong></div></div><p id="unlockMessage" class="unlock-message hidden"></p><button id="nextButton" class="primary-button big-button" type="button">つぎも やる！ ➜</button></section>
     </section>
+
     <section class="parent-note"><details><summary>おとなの人へ：このアプリの考え方</summary><p>「十いくつ」を10とバラに分け、まず10から引き、残った数とバラを合わせる<strong>減加法</strong>だけに絞っています。−5から始め、3問できるごとに−6、−7、−8、−9が順番に開きます。</p></details></section>
   </main>
-  <dialog id="collectionDialog" class="collection-dialog"><div class="dialog-inner"><div class="dialog-header"><div><p class="mini-label">あつめた ごほうび</p><h2>ぼくの ずかん</h2></div><button id="closeCollectionButton" class="close-button" type="button">✕</button></div><div class="collection-tabs"><button type="button" class="collection-tab active" data-collection="lake">🎣 さかな</button><button type="button" class="collection-tab" data-collection="forest">🌳 なかま</button></div><div id="collectionGrid" class="collection-grid"></div></div></dialog>
+
+  <dialog id="collectionDialog" class="collection-dialog"><div class="dialog-inner"><div class="dialog-header"><div><p class="mini-label">あつめた ごほうび</p><h2>ぼくの ずかん</h2></div><button id="closeCollectionButton" class="close-button" type="button">✕</button></div><div class="collection-tabs"><button type="button" class="collection-tab active" data-collection="treasure">🏴‍☠️ おたから</button><button type="button" class="collection-tab" data-collection="lake">🎣 さかな</button><button type="button" class="collection-tab" data-collection="forest">🌳 なかま</button></div><div id="collectionGrid" class="collection-grid"></div></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="app.js"></script>
 </body>
