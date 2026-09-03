@@ -3,79 +3,80 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#74c7a4" />
-  <meta name="description" content="同じ画面で、バラを分けて、10から引いて、答えを選ぶ子ども向けくり下がり引き算アプリ" />
+  <meta name="theme-color" content="#d9a83a" />
+  <meta name="description" content="宝探しのストーリーで、くり下がり引き算の減加法を目で理解する子ども向けアプリ" />
   <title>くりさがりアドベンチャー</title>
-  <link rel="stylesheet" href="styles-v6.css?v=8" />
-  <link rel="stylesheet" href="patch-v7.css?v=8" />
+  <link rel="stylesheet" href="styles-v6.css?v=9" />
+  <link rel="stylesheet" href="patch-v7.css?v=9" />
+  <link rel="stylesheet" href="patch-v8.css?v=9" />
 </head>
 <body>
 <main class="app-shell">
   <header class="topbar">
-    <div><p class="eyebrow">うごかして わかる！</p><h1>くりさがりアドベンチャー</h1></div>
-    <div class="top-actions"><button id="collectionButton" class="icon-button" type="button">📖<span>ずかん</span></button><div class="star-counter">⭐ <strong id="starCount">0</strong></div></div>
+    <div><p class="eyebrow">🏴‍☠️ 宝のとびらを ひらこう！</p><h1>くりさがりアドベンチャー</h1></div>
+    <div class="top-actions"><button id="collectionButton" class="icon-button" type="button">📖<span>おたから</span></button><div class="star-counter">⭐ <strong id="starCount">0</strong></div></div>
   </header>
 
-  <section class="theme-switcher">
-    <button type="button" class="theme-button active" data-theme="treasure">🏴‍☠️ たから</button>
-    <button type="button" class="theme-button" data-theme="lake">🎣 さかな</button>
-    <button type="button" class="theme-button" data-theme="forest">🌳 もり</button>
-  </section>
-
   <section class="stage-panel">
-    <div class="stage-title-row"><strong id="stageTitle">−5 ステージ</strong><span id="stageProgressText" class="stage-progress-text">あと3もんで −6</span></div>
+    <div class="stage-title-row"><strong id="stageTitle">−5 の とびら</strong><span id="stageProgressText" class="stage-progress-text">あと3もんで −6</span></div>
     <div id="stageButtons" class="stage-buttons"></div>
   </section>
 
   <section id="gameCard" class="game-card treasure">
-    <div class="scene"><div class="scene-sky"></div><div class="scene-ground"></div><div id="sceneHero" class="scene-hero">🏴‍☠️</div><div id="sceneTarget" class="scene-target">🧰</div></div>
+    <div class="scene"><div class="scene-sky"></div><div class="scene-ground"></div><div class="scene-hero">🏴‍☠️</div><div class="scene-target">🏛️</div></div>
+
+    <div class="story-strip">
+      <div class="story-pirate">🏴‍☠️</div>
+      <div id="storyText" class="story-copy">宝のとびらだ！ <strong>💎12こ</strong>ある。<br><span class="story-goal">🔐 とびらをあけるには <strong>5こ つかう！</strong></span></div>
+      <div id="doorVisual" class="story-door"><span id="doorEmoji">🚪</span><span class="door-need">💎<span id="doorNeed">5</span></span><span id="chestEmoji">🧰</span></div>
+    </div>
+
     <div class="problem-row"><span class="problem-label">もんだい</span><div id="problemText" class="problem-text">12 − 5</div></div>
     <div id="equation" class="equation" aria-live="polite">12 − 5 = <strong>？</strong></div>
 
     <section class="board">
-      <div class="board-hint"><span id="hintBadge" class="hint-badge">①</span><span id="hintText">2こ →</span></div>
+      <div class="board-hint"><span id="hintBadge" class="hint-badge">①</span><span id="hintText">2こ → ふくろへ</span></div>
 
       <div class="workspace">
         <div id="tenArea" class="ten-area drop-area">
-          <span id="sourceTitle" class="zone-title">12こ</span><strong id="sourceCount" class="zone-count">12</strong>
+          <span id="sourceTitle" class="zone-title">💎 12こ</span><strong id="sourceCount" class="zone-count">12</strong>
           <div id="sourceBalls" class="ball-grid"></div>
         </div>
 
         <div id="extraArea" class="extra-area drop-area pulse">
-          <span class="zone-title">バラ <strong id="extraNeed">2</strong>こ</span><strong id="extraCount" class="zone-count">0/2</strong>
+          <span class="zone-title">🎒 よけておく <strong id="extraNeed">2</strong>こ</span><strong id="extraCount" class="zone-count">0/2</strong>
           <div id="extraBalls" class="ball-row"></div>
         </div>
 
         <div id="subtractArea" class="subtract-area drop-area">
-          <span class="zone-title">ひく <strong class="minusText">−<span id="subtractNeed">5</span></strong></span><strong id="subtractCount" class="zone-count">0/5</strong>
+          <span class="zone-title">🚪 とびらに使った <strong>−<span id="subtractNeed">5</span></strong></span><strong id="subtractCount" class="zone-count">0/5</strong>
           <div id="subtractBalls" class="ball-row"></div>
         </div>
       </div>
 
       <section id="answerPanel" class="answer-panel hidden">
-        <h2 class="answer-title">こたえは いくつ？</h2>
+        <h2 class="answer-title">💎 のこった宝石は いくつ？</h2>
         <div id="answers" class="answers"></div>
       </section>
 
       <section id="resultInline" class="result-inline hidden">
-        <h2>せいかい！ 🎉</h2>
+        <h2>🚪✨ とびらが ひらいた！</h2>
         <div id="resultEquation" class="result-equation"></div>
         <div id="resultBalls" class="result-balls"></div>
-        <div class="reward-row"><div id="rewardEmoji" class="reward-emoji">💎</div><div class="reward-text"><span id="rewardPrefix"></span><strong id="rewardName"></strong></div></div>
+        <div class="reward-row"><div id="rewardEmoji" class="reward-emoji">💎</div><div class="reward-text"><span>おたからを みつけた！</span><strong id="rewardName"></strong></div></div>
         <p id="unlockMessage" class="unlock-message hidden"></p>
-        <button id="nextButton" class="primary-button" type="button">つぎも やる！ ➜</button>
+        <button id="nextButton" class="primary-button" type="button">つぎの とびらへ！ ➜</button>
       </section>
     </section>
   </section>
 
-  <section class="parent-note"><details><summary>おとなの人へ</summary><p>画面を切り替えません。12−5なら、12個のうち2個を右へ分けてそのまま残し、左の10個から5個を下へ移動します。すべての玉は同じ色のまま。左の10個の場所には、引いた5個ぶんの点線の丸を残します。左に5個・右に2個が見えている状態で1〜9から答えを選びます。</p></details></section>
+  <section class="parent-note"><details><summary>おとなの人へ</summary><p>宝探しに一本化しています。たとえば12−5なら「12個の宝石があり、宝の扉を開けるために5個使う」という目的です。まず2個を右へよけて10個にし、10個から5個を扉へ使います。使った5個はグレーになって下に残り、元の位置には点線の丸が残ります。左の5個＋右の2個を見ながら、1〜9から答えを選びます。</p></details></section>
 </main>
 
 <dialog id="collectionDialog" class="collection-dialog"><div class="dialog-inner">
-  <div class="dialog-header"><div><p class="mini-label">あつめた ごほうび</p><h2>ぼくの ずかん</h2></div><button id="closeCollectionButton" class="close-button" type="button">✕</button></div>
-  <div class="collection-tabs"><button type="button" class="collection-tab active" data-collection="treasure">🏴‍☠️ おたから</button><button type="button" class="collection-tab" data-collection="lake">🎣 さかな</button><button type="button" class="collection-tab" data-collection="forest">🌳 なかま</button></div>
+  <div class="dialog-header"><div><p class="mini-label">みつけた おたから</p><h2>🏴‍☠️ おたからずかん</h2></div><button id="closeCollectionButton" class="close-button" type="button">✕</button></div>
   <div id="collectionGrid" class="collection-grid"></div>
 </div></dialog>
-<script src="app-v7.js?v=8"></script>
+<script src="app-v8.js?v=9"></script>
 </body>
 </html>
