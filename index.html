@@ -4,15 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#74c7a4" />
-  <meta name="description" content="3回のドラッグで減加法を目で理解する、子ども向けくり下がり引き算アプリ" />
+  <meta name="description" content="同じ画面で、バラを分けて、10から引いて、答えを選ぶ子ども向けくり下がり引き算アプリ" />
   <title>くりさがりアドベンチャー</title>
-  <link rel="stylesheet" href="styles-v5.css?v=6" />
-  <link rel="stylesheet" href="patch-v5.css?v=6" />
+  <link rel="stylesheet" href="styles-v6.css?v=7" />
 </head>
 <body>
 <main class="app-shell">
   <header class="topbar">
-    <div><p class="eyebrow">3かい うごかすだけ！</p><h1>くりさがりアドベンチャー</h1></div>
+    <div><p class="eyebrow">うごかして わかる！</p><h1>くりさがりアドベンチャー</h1></div>
     <div class="top-actions"><button id="collectionButton" class="icon-button" type="button">📖<span>ずかん</span></button><div class="star-counter">⭐ <strong id="starCount">0</strong></div></div>
   </header>
 
@@ -29,76 +28,46 @@
 
   <section id="gameCard" class="game-card treasure">
     <div class="scene"><div class="scene-sky"></div><div class="scene-ground"></div><div id="sceneHero" class="scene-hero">🏴‍☠️</div><div id="sceneTarget" class="scene-target">🧰</div></div>
-    <div class="problem-bar"><span class="problem-label">もんだい</span><div id="problemText" class="problem-text">12 − 5</div></div>
+    <div class="problem-row"><span class="problem-label">もんだい</span><div id="problemText" class="problem-text">12 − 5</div></div>
     <div id="equation" class="equation" aria-live="polite">12 − 5 = <strong>？</strong></div>
 
-    <ol class="stepper">
-      <li id="step1" class="step active"><span>1</span><b>10とバラ</b></li>
-      <li id="step2" class="step"><span>2</span><b>10からひく</b></li>
-      <li id="step3" class="step"><span>3</span><b>ガッチャン</b></li>
-    </ol>
+    <section class="board">
+      <div class="board-hint"><span id="hintBadge" class="hint-badge">①</span><span id="hintText">2こ →</span></div>
 
-    <section id="splitStep" class="lesson-step">
-      <h2><span id="splitNumber">12</span>こを 10 と バラに！</h2>
-      <div class="split-play">
-        <div id="tenFrameTool" class="ten-frame-tool" role="button" aria-label="10のわくを丸に重ねる">
-          <div class="tool-title">10</div>
-          <div class="mini-ten-frame">
-            <span class="mini-slot"></span><span class="mini-slot"></span><span class="mini-slot"></span><span class="mini-slot"></span><span class="mini-slot"></span>
-            <span class="mini-slot"></span><span class="mini-slot"></span><span class="mini-slot"></span><span class="mini-slot"></span><span class="mini-slot"></span>
-          </div>
+      <div class="workspace">
+        <div id="tenArea" class="ten-area drop-area">
+          <span id="sourceTitle" class="zone-title">12こ</span><strong id="sourceCount" class="zone-count">12</strong>
+          <div id="sourceBalls" class="ball-grid"></div>
         </div>
-        <div class="drag-arrow">➡</div>
-        <div id="wholeGroup" class="whole-group drop-area"><div id="wholeBalls" class="ball-grid"></div></div>
-      </div>
-      <div id="splitResult" class="split-result hidden">
-        <div class="result-group"><strong class="tenText">10</strong><div id="splitTenBalls" class="ball-grid"></div></div>
-        <div class="plus">＋</div>
-        <div class="result-group extra-group"><strong id="splitExtraNumber" class="extraText">？</strong><div id="splitExtraBalls" class="ball-row"></div></div>
-      </div>
-      <div class="helper-row"><button id="autoSplit" class="helper-button" type="button">👉 ここをタップでもOK</button></div>
-    </section>
 
-    <section id="takeStep" class="lesson-step hidden">
-      <h2>10から <span id="takeMinus">−5</span></h2>
-      <div class="take-play">
-        <div id="takeTenBox" class="take-ten-box drop-area"><div id="takeTenBalls" class="ball-grid"></div><strong class="count-badge">10</strong></div>
-        <div class="drag-arrow">⬅</div>
-        <div id="takeTool" class="take-tool" role="button" aria-label="引く数を10のまとまりへ動かす">
-          <div id="takeToolEmoji" class="take-emoji">🗝️</div>
-          <div id="takeMinusBig" class="take-minus"><span id="takeToolCount">5</span>こ</div>
+        <div id="extraArea" class="extra-area drop-area pulse">
+          <span class="zone-title">バラ <strong id="extraNeed">2</strong>こ</span><strong id="extraCount" class="zone-count">0/2</strong>
+          <div id="extraBalls" class="ball-row"></div>
+        </div>
+
+        <div id="subtractArea" class="subtract-area drop-area">
+          <span class="zone-title">ひく <strong class="minusText">−<span id="subtractNeed">5</span></strong></span><strong id="subtractCount" class="zone-count">0/5</strong>
+          <div id="subtractBalls" class="ball-row"></div>
         </div>
       </div>
-      <div class="extra-park"><strong id="parkExtraNumber" class="number-badge extraText">2</strong><div id="parkExtraBalls" class="ball-row"></div></div>
-      <div class="helper-row"><button id="autoTake" class="helper-button" type="button">👉 ここをタップでもOK</button></div>
-    </section>
 
-    <section id="mergeStep" class="lesson-step hidden">
-      <h2><span class="extraText">バラ</span> と <span class="tenText">のこり</span> を ガッチャン！</h2>
-      <div class="merge-play">
-        <div id="mergeExtraPack" class="merge-pack" role="button" aria-label="青いまとまりを黄色いまとまりへ動かす">
-          <div id="mergeExtraNumber" class="merge-number extraText">2</div><div id="mergeExtraBalls" class="ball-row"></div>
-        </div>
-        <div class="drag-arrow">➡</div>
-        <div id="mergeTarget" class="merge-target drop-area">
-          <div class="merge-label">ここへ！</div>
-          <div id="mergeRemainNumber" class="merge-number tenText">5</div><div id="mergeRemainBalls" class="ball-row"></div>
-          <div id="mergeFinalBalls" class="final-balls"></div><div id="mergeAnswerNumber" class="answer-circle">？</div>
-        </div>
-      </div>
-      <div class="helper-row"><button id="autoMerge" class="helper-button" type="button">✨ ガッチャン</button></div>
-    </section>
+      <section id="answerPanel" class="answer-panel hidden">
+        <h2 class="answer-title">こたえは いくつ？</h2>
+        <div id="answers" class="answers"></div>
+      </section>
 
-    <section id="resultStep" class="result-step hidden">
-      <div class="confetti">✨ ⭐ ✨</div><h2>できた！</h2>
-      <div id="resultEquation" class="result-equation"></div><div id="resultBalls" class="result-balls"></div>
-      <div class="reward-card"><div id="rewardEmoji" class="reward-emoji">💎</div><div><span id="rewardPrefix"></span><strong id="rewardName"></strong></div></div>
-      <p id="unlockMessage" class="unlock-message hidden"></p>
-      <button id="nextButton" class="primary-button" type="button">つぎも やる！ ➜</button>
+      <section id="resultInline" class="result-inline hidden">
+        <h2>せいかい！ 🎉</h2>
+        <div id="resultEquation" class="result-equation"></div>
+        <div id="resultBalls" class="result-balls"></div>
+        <div class="reward-row"><div id="rewardEmoji" class="reward-emoji">💎</div><div class="reward-text"><span id="rewardPrefix"></span><strong id="rewardName"></strong></div></div>
+        <p id="unlockMessage" class="unlock-message hidden"></p>
+        <button id="nextButton" class="primary-button" type="button">つぎも やる！ ➜</button>
+      </section>
     </section>
   </section>
 
-  <section class="parent-note"><details><summary>おとなの人へ</summary><p>説明を読む前提をやめました。1問につき「10の枠をかぶせる → 引く数を10へぶつける → バラを残りへ合体」の大きなドラッグ3回だけです。12−5なら、最後まで青2個＋黄5個＝7個の色を維持します。</p></details></section>
+  <section class="parent-note"><details><summary>おとなの人へ</summary><p>画面を切り替えません。12−5なら、12個のうち2個を右へ分けてそのまま残し、左の10個から5個を下へ移動。左に5個・右に2個が見えている状態で1〜9から答えを選びます。正解後に「12−5＝2＋5＝7」を表示します。</p></details></section>
 </main>
 
 <dialog id="collectionDialog" class="collection-dialog"><div class="dialog-inner">
@@ -106,6 +75,6 @@
   <div class="collection-tabs"><button type="button" class="collection-tab active" data-collection="treasure">🏴‍☠️ おたから</button><button type="button" class="collection-tab" data-collection="lake">🎣 さかな</button><button type="button" class="collection-tab" data-collection="forest">🌳 なかま</button></div>
   <div id="collectionGrid" class="collection-grid"></div>
 </div></dialog>
-<script src="app-v5.js?v=6"></script>
+<script src="app-v6.js?v=7"></script>
 </body>
 </html>
