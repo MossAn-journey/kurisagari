@@ -6,7 +6,8 @@
   <meta name="theme-color" content="#74c7a4" />
   <meta name="description" content="3回のドラッグで減加法を目で理解する、子ども向けくり下がり引き算アプリ" />
   <title>くりさがりアドベンチャー</title>
-  <link rel="stylesheet" href="styles-v5.css?v=5" />
+  <link rel="stylesheet" href="styles-v5.css?v=6" />
+  <link rel="stylesheet" href="patch-v5.css?v=6" />
 </head>
 <body>
 <main class="app-shell">
@@ -48,9 +49,7 @@
           </div>
         </div>
         <div class="drag-arrow">➡</div>
-        <div id="wholeGroup" class="whole-group drop-area">
-          <div id="wholeBalls" class="ball-grid"></div><strong class="whole-number" id="wholeCount">12</strong>
-        </div>
+        <div id="wholeGroup" class="whole-group drop-area"><div id="wholeBalls" class="ball-grid"></div></div>
       </div>
       <div id="splitResult" class="split-result hidden">
         <div class="result-group"><strong class="tenText">10</strong><div id="splitTenBalls" class="ball-grid"></div></div>
@@ -107,6 +106,6 @@
   <div class="collection-tabs"><button type="button" class="collection-tab active" data-collection="treasure">🏴‍☠️ おたから</button><button type="button" class="collection-tab" data-collection="lake">🎣 さかな</button><button type="button" class="collection-tab" data-collection="forest">🌳 なかま</button></div>
   <div id="collectionGrid" class="collection-grid"></div>
 </div></dialog>
-<script src="app-v5.js?v=5"></script>
+<script src="app-v5.js?v=6"></script>
 </body>
 </html>
