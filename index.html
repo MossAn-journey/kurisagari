@@ -6,7 +6,8 @@
   <meta name="theme-color" content="#74c7a4" />
   <meta name="description" content="同じ画面で、バラを分けて、10から引いて、答えを選ぶ子ども向けくり下がり引き算アプリ" />
   <title>くりさがりアドベンチャー</title>
-  <link rel="stylesheet" href="styles-v6.css?v=7" />
+  <link rel="stylesheet" href="styles-v6.css?v=8" />
+  <link rel="stylesheet" href="patch-v7.css?v=8" />
 </head>
 <body>
 <main class="app-shell">
@@ -67,7 +68,7 @@
     </section>
   </section>
 
-  <section class="parent-note"><details><summary>おとなの人へ</summary><p>画面を切り替えません。12−5なら、12個のうち2個を右へ分けてそのまま残し、左の10個から5個を下へ移動。左に5個・右に2個が見えている状態で1〜9から答えを選びます。正解後に「12−5＝2＋5＝7」を表示します。</p></details></section>
+  <section class="parent-note"><details><summary>おとなの人へ</summary><p>画面を切り替えません。12−5なら、12個のうち2個を右へ分けてそのまま残し、左の10個から5個を下へ移動します。すべての玉は同じ色のまま。左の10個の場所には、引いた5個ぶんの点線の丸を残します。左に5個・右に2個が見えている状態で1〜9から答えを選びます。</p></details></section>
 </main>
 
 <dialog id="collectionDialog" class="collection-dialog"><div class="dialog-inner">
@@ -75,6 +76,6 @@
   <div class="collection-tabs"><button type="button" class="collection-tab active" data-collection="treasure">🏴‍☠️ おたから</button><button type="button" class="collection-tab" data-collection="lake">🎣 さかな</button><button type="button" class="collection-tab" data-collection="forest">🌳 なかま</button></div>
   <div id="collectionGrid" class="collection-grid"></div>
 </div></dialog>
-<script src="app-v6.js?v=7"></script>
+<script src="app-v7.js?v=8"></script>
 </body>
 </html>
