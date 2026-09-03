@@ -6,9 +6,10 @@
   <meta name="theme-color" content="#d9a83a" />
   <meta name="description" content="宝探しのストーリーで、くり下がり引き算の減加法を目で理解する子ども向けアプリ" />
   <title>くりさがりアドベンチャー</title>
-  <link rel="stylesheet" href="styles-v6.css?v=9" />
-  <link rel="stylesheet" href="patch-v7.css?v=9" />
-  <link rel="stylesheet" href="patch-v8.css?v=9" />
+  <link rel="stylesheet" href="styles-v6.css?v=11" />
+  <link rel="stylesheet" href="patch-v7.css?v=11" />
+  <link rel="stylesheet" href="patch-v8.css?v=11" />
+  <link rel="stylesheet" href="patch-v9.css?v=11" />
 </head>
 <body>
 <main class="app-shell">
@@ -25,10 +26,18 @@
   <section id="gameCard" class="game-card treasure">
     <div class="scene"><div class="scene-sky"></div><div class="scene-ground"></div><div class="scene-hero">🏴‍☠️</div><div class="scene-target">🏛️</div></div>
 
+    <div class="item-picker" aria-label="つかうアイテムをえらぶ">
+      <span class="item-picker-label">つかうもの：</span>
+      <button type="button" class="item-choice active" data-item="gem" aria-label="宝石">💎</button>
+      <button type="button" class="item-choice" data-item="coin" aria-label="コイン">🪙</button>
+      <button type="button" class="item-choice" data-item="book" aria-label="魔法の本">📕</button>
+      <span id="itemNameLabel" class="item-picker-label">宝石</span>
+    </div>
+
     <div class="story-strip">
       <div class="story-pirate">🏴‍☠️</div>
       <div id="storyText" class="story-copy">宝のとびらだ！ <strong>💎12こ</strong>ある。<br><span class="story-goal">🔐 とびらをあけるには <strong>5こ つかう！</strong></span></div>
-      <div id="doorVisual" class="story-door"><span id="doorEmoji">🚪</span><span class="door-need">💎<span id="doorNeed">5</span></span><span id="chestEmoji">🧰</span></div>
+      <div id="doorVisual" class="story-door"><span id="doorEmoji">🚪</span><span class="door-need"><span id="doorItemEmoji">💎</span><span id="doorNeed">5</span></span><span id="chestEmoji">🧰</span></div>
     </div>
 
     <div class="problem-row"><span class="problem-label">もんだい</span><div id="problemText" class="problem-text">12 − 5</div></div>
@@ -55,7 +64,7 @@
       </div>
 
       <section id="answerPanel" class="answer-panel hidden">
-        <h2 class="answer-title">💎 のこった宝石は いくつ？</h2>
+        <h2 id="answerTitle" class="answer-title">💎 のこった宝石は いくつ？</h2>
         <div id="answers" class="answers"></div>
       </section>
 
@@ -70,13 +79,13 @@
     </section>
   </section>
 
-  <section class="parent-note"><details><summary>おとなの人へ</summary><p>宝探しに一本化しています。たとえば12−5なら「12個の宝石があり、宝の扉を開けるために5個使う」という目的です。まず2個を右へよけて10個にし、10個から5個を扉へ使います。使った5個はグレーになって下に残り、元の位置には点線の丸が残ります。左の5個＋右の2個を見ながら、1〜9から答えを選びます。</p></details></section>
+  <section class="parent-note"><details><summary>おとなの人へ</summary><p>宝探しに一本化しています。💎・🪙・📕から好きなアイテムを選べます。たとえば12−5なら、2個を右へよけて10個にし、10個から5個を扉へ使います。使った5個はグレーになって下に残り、元の位置には点線の丸が残ります。式は操作の順に「12−5＝10＋2−5＝7」と表示します。</p></details></section>
 </main>
 
 <dialog id="collectionDialog" class="collection-dialog"><div class="dialog-inner">
   <div class="dialog-header"><div><p class="mini-label">みつけた おたから</p><h2>🏴‍☠️ おたからずかん</h2></div><button id="closeCollectionButton" class="close-button" type="button">✕</button></div>
   <div id="collectionGrid" class="collection-grid"></div>
 </div></dialog>
-<script src="app-v8.js?v=10"></script>
+<script src="app-v9.js?v=11"></script>
 </body>
 </html>
